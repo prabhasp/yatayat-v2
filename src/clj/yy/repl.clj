@@ -1,5 +1,5 @@
-(ns yy2.repl
-  (:use yy2.handler
+(ns yy.repl
+  (:use yy.handler
         ring.server.standalone
         [ring.middleware file-info file]))
 
