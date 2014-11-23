@@ -5,12 +5,15 @@
                  [compojure "1.1.6"]
                  [hiccup "1.0.5"]
                  [ring-server "0.3.1"]
+                 [org.clojure/data.zip "0.1.1"]
+                 [midje "1.6.3"]
                  ;; cljs
                  [org.clojure/clojurescript "0.0-2371"]
                  [org.clojure/core.async "0.1.346.0-17112a-alpha"]
                  [com.facebook/react "0.11.1"]
                  [om "0.7.3"]]
   :plugins [[lein-ring "0.8.12"]
+            [lein-midje "3.1.3"]
             [lein-cljsbuild "1.0.4-SNAPSHOT"]]
   :ring {:handler yy.handler/app
          :init yy.handler/init
