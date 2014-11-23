@@ -1,19 +1,21 @@
-# yy2
+# yy
 
-FIXME
+Trying to rewrite yatayat in clj / cljs.
 
-## Prerequisites
+## Running yy yourself
+
+### Prerequesites
 
 You will need [Leiningen][1] 1.7.0 or above installed.
 
 [1]: https://github.com/technomancy/leiningen
 
-## Running
+### Running
 
 To start a web server for the application, run:
 
     lein ring server
 
-## License
+### License
 
-Copyright © 2014 FIXME
+Copyright © 2014 Prabhas Pokharel

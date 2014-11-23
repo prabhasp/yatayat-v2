@@ -1,17 +1,17 @@
-(ns yy2.handler
+(ns yy.handler
   (:require [compojure.core :refer [defroutes routes]]
             [ring.middleware.resource :refer [wrap-resource]]
             [ring.middleware.file-info :refer [wrap-file-info]]
             [hiccup.middleware :refer [wrap-base-url]]
             [compojure.handler :as handler]
             [compojure.route :as route]
-            [yy2.routes.home :refer [home-routes]]))
+            [yy.routes.home :refer [home-routes]]))
 
 (defn init []
-  (println "yy2 is starting"))
+  (println "yy is starting"))
 
 (defn destroy []
-  (println "yy2 is shutting down"))
+  (println "yy is shutting down"))
 
 (defroutes app-routes
   (route/resources "/")
