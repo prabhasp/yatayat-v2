@@ -14,9 +14,7 @@
 
 (defn z->node [n]
   "Take a node in zip form and makes it into a yy node"
-  (merge {:type :node}
-           (:attrs (first n))
-           (kv-map n)))
+  (merge {:type :node} (:attrs (first n)) (kv-map n)))
 
 (defn z->way [nodemap w]
   "Take a way in zip form and make it into a yy way.
