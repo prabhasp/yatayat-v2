@@ -83,7 +83,9 @@
          (:route rel1) => "tempo"
          (:type rel1) => "route"
          (:nodes rel1) => (select-keys nmap #{"31228768" "1274184084"})
-         (:ways rel1) => wmap)
+         (:ways rel1) => wmap
+         (keys (:roles rel1)) => ["terminus"]
+         ((:roles rel1) "terminus") => [(nmap "31228768") (nmap "1274184084")])
   (facts "xml->relationmap generation works correctly."
          (keys rmap) => ["2277212"]
          (rmap "2277212") => rel1))
