@@ -1,4 +1,4 @@
-(ns yy.test.handler
+(ns yy.t-handler
   (:use clojure.test
         ring.mock.request
         yy.handler))

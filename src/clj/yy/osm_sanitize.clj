@@ -1,9 +1,6 @@
 (ns yy.osm-sanitize
   (require [yy.osm-parse :as parse]))
 
-(def test-obj (parse/xml->yy "resources/public/data/transit.stable.xml"))
-(def test-rel (nth (vals (:relationmap test-obj)) 26))
-
 (defn name-or-id-with-prefix [x pre]
   (if (:name x)
     (str pre " " (:name x))
@@ -77,13 +74,6 @@
        (map vals)
        flatten distinct))
 
-(def tw (map #(hash-map :id %) (range 20)))
-(def ws (->> (map merge (-> test-rel :waymap vals) tw)))
-(def ews (ws->ew-map ws))
-(->> ws
-     connect-connected-ways
-     pprinter)
-
 (defn diff-from-connected [rel]
   (- (* 2
         (->> (ws->ew-map rel)
@@ -98,8 +88,3 @@
           distinct
           count)
      2)) ; 2 for the 2 ends
-
-
-(map-indexed #(vector %1 (diff-from-connected %2)) (vals (:relationmap test-obj)))
-(nth (vals (:relationmap test-obj)) 26)
-(remove #(pos? (diff-from-connected %)) (-> test-obj :relationmap vals))

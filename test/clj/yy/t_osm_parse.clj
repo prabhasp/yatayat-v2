@@ -1,4 +1,4 @@
-(ns yy.osm-parse-test
+(ns yy.t-osm-parse
   (:require [midje.sweet :refer :all]
             [yy.osm-parse :refer :all]
             [clojure.zip :as zip]
