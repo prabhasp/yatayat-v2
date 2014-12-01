@@ -14,13 +14,13 @@
 
 (defn z->node [n]
   "Take a node in zip form and makes it into a yy node"
-  (merge {:type :node} (:attrs (first n)) (kv-map n)))
+  (merge (kv-map n) (:attrs (first n)) {:type :node}))
 
 (defn z->way [nodemap w]
   "Take a way in zip form and make it into a yy way.
    Also needs a nodemap that maps ids to node objects."
-  (let [nodes (select-keys nodemap (zx/xml-> w :nd (zx/attr :ref)))]
-    (merge {:type :way :nodes nodes} (kv-map w))))
+  (let [nodes (map nodemap (zx/xml-> w :nd (zx/attr :ref)))]
+    (merge  (kv-map w) (:attrs (first w)) {:type :way :nodes nodes})))
 
 (defn z->relation [nodemap waymap r]
   "Take a way in zip form and make it into a yy relation.
@@ -33,10 +33,10 @@
                        (hash-map (rl m) [(el m)]))
         roles (apply merge-with concat role->mem-list)
         ref-ids (map #(zx/attr % :ref) mems)
-        nodes (select-keys nodemap ref-ids)
-        ways (select-keys waymap ref-ids)]
-    (merge {:type :way :nodes nodes :ways ways :roles roles}
-           (kv-map r))))
+        nodemap (select-keys nodemap ref-ids)
+        waymap (select-keys waymap ref-ids)]
+    (merge (kv-map r) (:attrs (first r))
+           {:type :relation :nodemap nodemap :waymap waymap :roles roles})))
 
 (defn- z->map [zpr typ f]
   "Take a zipper from xml, and extracts a map for typ :node|:way|:relation,
@@ -57,6 +57,4 @@
         nodemap (z->nodemap root)
         waymap (z->waymap nodemap root)
         relationmap (z->relationmap nodemap waymap root)]
-    {:ways waymap :relationmap relationmap :nodemap nodemap}))
-
-(def test-obj (xml->yy "resources/public/data/transit.stable.xml"))
+    {:waymap waymap :relationmap relationmap :nodemap nodemap}))

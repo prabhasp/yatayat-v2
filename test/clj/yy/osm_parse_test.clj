@@ -73,17 +73,19 @@
         (:highway way1) => "tertiary"
         (:name way1) => "Pashupati Marga"
         (:type way1) => :way
+        (:id way1) => "120105828"
         (count (:nodes way1)) => 7
-        ((:nodes way1) "31150627") => node1)
+        (last (:nodes way1)) => node1)
   (facts "xml->way parsing works correctly."
          (keys wmap) => ["120105828"]
          (wmap "120105828") => way1)
   (facts "xml->relation parsing works correctly."
+         (:id rel1) => "2277212"
          (:ref rel1) => "annapurna B"
          (:route rel1) => "tempo"
-         (:type rel1) => "route"
-         (:nodes rel1) => (select-keys nmap #{"31228768" "1274184084"})
-         (:ways rel1) => wmap
+         (:type rel1) => :relation
+         (:nodemap rel1) => (select-keys nmap #{"31228768" "1274184084"})
+         (:waymap rel1) => wmap
          (keys (:roles rel1)) => ["terminus"]
          ((:roles rel1) "terminus") => [(nmap "31228768") (nmap "1274184084")])
   (facts "xml->relationmap generation works correctly."
